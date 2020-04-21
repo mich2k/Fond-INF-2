@@ -1,0 +1,5 @@
+﻿  main.c
+C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\Project1\Project1\main.c(9,21): warning C4477: 'fprintf': con la stringa di formato '%lu' è necessario un argomento di tipo 'unsigned long', ma il tipo dell'argomento variadic 1 è 'uint64_t'
+C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\Project1\Project1\main.c(9,21): message : provare a usare '%llu' nella stringa di formato
+C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\Project1\Project1\main.c(9,21): message : provare a usare '%I64u' nella stringa di formato
+  Project1.vcxproj -> C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\Project1\Debug\Project1.exe
