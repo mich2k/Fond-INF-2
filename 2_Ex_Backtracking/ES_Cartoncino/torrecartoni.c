@@ -61,7 +61,7 @@ bool isvalid(const cartone *c, const uint32_t *v, uint16_t n) // verifica se vie
     return true;
 }
 
-void BactrackSubset(const cartone *c, const int n, int i, uint32_t *v, uint16_t k, uint32_t height, // funzione di backtracking
+void BactrackSubset(const cartone *c, const int n, int i, uint32_t *v, uint32_t height, // funzione di backtracking
                     uint32_t *mheight, uint32_t *best, unsigned int *leng)
 {
     if (i == n)
@@ -82,18 +82,18 @@ void BactrackSubset(const cartone *c, const int n, int i, uint32_t *v, uint16_t 
             {
                 *leng = len;
                 *mheight = height;
-                for (uint16_t k = 0; k < len; ++k)
-                    best[k] = std_v[k];
-                // memcpy(best,std_v, len*sizeof(uint32_t));
+               // for (uint16_t k = 0; k < len; ++k)
+                 //   best[k] = std_v[k];
+                 memcpy(best,std_v, len*sizeof(uint32_t));
             }
         }
 
         return;
     }
-    for (uint16_t j = 0; j < k; j++)
+    for (uint16_t j = 0; j < n+1; j++)
     {
         v[i] = j; // scelta del valore i (da 0 a 1) per il passo s (da 0 a n-1)
-        BactrackSubset(c, n, i + 1, v, k, height, mheight, best, leng);
+        BactrackSubset(c, n, i + 1, v, height, mheight, best, leng);
     }
 }
 
@@ -103,7 +103,7 @@ void TorreCartoni(cartone *c, int n)
     uint32_t *best = calloc(n, sizeof(uint32_t));
     uint32_t mheight = 0;
     unsigned int len;
-    BactrackSubset(c, n, 0, v, n + 1, 0, &mheight, best, &len);
+    BactrackSubset(c, n, 0, v, n + 1, &mheight, best, &len);
     for (int i = len - 1; i != -1; --i)
         fprintf(stdout, "\n\t%i", best[i]);
     fprintf(stdout, "\n\tcon un altezza max di: %i\n", mheight);
