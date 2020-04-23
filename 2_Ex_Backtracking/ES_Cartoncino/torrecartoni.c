@@ -11,7 +11,7 @@ uint32_t *standard(const uint32_t *v, uint16_t n, unsigned int *cont) // elimina
             *(cont) += 1;
         }
     }
-    std = realloc(std, *cont * sizeof(uint32_t));
+    std = realloc(std, (*cont) * sizeof(uint32_t));
     return std;
 }
 
@@ -82,9 +82,7 @@ void BactrackSubset(const cartone *c, const int n, int i, uint32_t *v, uint32_t 
             {
                 *leng = len;
                 *mheight = height;
-               // for (uint16_t k = 0; k < len; ++k)
-                 //   best[k] = std_v[k];
-                 memcpy(best,std_v, len*sizeof(uint32_t));
+                memcpy(best,std_v, len*sizeof(uint32_t));
             }
         }
 
@@ -103,27 +101,10 @@ void TorreCartoni(cartone *c, int n)
     uint32_t *best = calloc(n, sizeof(uint32_t));
     uint32_t mheight = 0;
     unsigned int len;
-    BactrackSubset(c, n, 0, v, n + 1, &mheight, best, &len);
+    BactrackSubset(c, n, 0, v, 0, &mheight, best, &len);
     for (int i = len - 1; i != -1; --i)
         fprintf(stdout, "\n\t%i", best[i]);
     fprintf(stdout, "\n\tcon un altezza max di: %i\n", mheight);
     free(best);
     free(v);
-}
-
-void main(void) // main / input
-{
-    cartone c[] = {
-        {.p = 25, .a = 20, .l = 50},
-        {.p = 10, .a = 10, .l = 8},
-        {.p = 9, .a = 3, .l = 5},
-        {.p = 5, .a = 20, .l = 200},
-        {.p = 10, .a = 10, .l = 202},
-        {.p = 24, .a = 3, .l = 55}
-        };
-    int n = sizeof(c) / sizeof(*c);
-    TorreCartoni(c, n);
-    // 4 digits 0-3          -> sol. tot 4^3=64
-    //backtrack(0, n, arr);
-    return;
 }
