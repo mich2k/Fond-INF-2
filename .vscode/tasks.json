@@ -4,10 +4,10 @@
 		{
 			"type": "shell",
 			"label": "C/C++: gcc build active file",
-			"command": "/usr/bin/gcc",
+			"command": "/usr/bin/clang",			 // COMPILER
 			"args": [
 				"-g",
-				"${file}",
+				"${file}",	//	"${fileDirname}/*.c"	+	*.h files
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}.out"
 			],

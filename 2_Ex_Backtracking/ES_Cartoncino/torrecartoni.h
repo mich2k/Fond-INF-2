@@ -13,11 +13,11 @@ typedef struct {
     unsigned l; // Limite
 } cartone;
 
-extern void TorreCartoni(cartone *c, int n);
-extern void BactrackSubset(const cartone *c, const int n, int i, uint32_t *v, uint32_t height, uint32_t *mheight, uint32_t *best, unsigned int *leng);
-extern uint32_t *standard(const uint32_t *v, uint16_t n, unsigned int *cont);
-extern bool check_double(const uint32_t *v, uint16_t n);
-extern bool isvalid(const cartone *c, const uint32_t *v, uint16_t n);
+extern void TorreCartoni(cartone *, int);
+extern void BactrackSubset(const cartone *, const int, int i, uint32_t*, uint32_t, uint32_t*, uint32_t*, unsigned int*);
+extern uint32_t *standard(const uint32_t *, uint16_t, unsigned int*);
+extern bool check_double(const uint32_t *, uint16_t );
+extern bool isvalid(const cartone *, const uint32_t *, uint16_t n);
 
 
 
