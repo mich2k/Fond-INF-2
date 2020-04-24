@@ -1,7 +1,7 @@
 #include "torrecartoni.h"
 #include "torrecartoni.c"
 
-void main(void) // main / input
+int main(void) // main / input
 {
     cartone c[] = {
         {.p = 25, .a = 20, .l = 50},
@@ -17,5 +17,5 @@ void main(void) // main / input
     TorreCartoni(c, n);
     // 4 digits 0-3          -> sol. tot 4^3=64
     //backtrack(0, n, arr);
-    return;
+    return EXIT_SUCCESS;
 }
