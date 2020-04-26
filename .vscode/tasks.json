@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "C/C++: gcc build active file",
+			"label": "clang debug & exec",
 			"command": "/usr/bin/clang",			 // COMPILER
 			"args": [
 				"-g",
