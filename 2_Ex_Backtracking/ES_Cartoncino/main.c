@@ -9,9 +9,6 @@ int main(void) // main / input
         {.p = 9, .a = 3, .l = 5},
         {.p = 5, .a = 20, .l = 200},
         {.p = 10, .a = 10, .l = 202},
-        {.p = 10, .a = 10, .l = 202},
-        {.p = 10, .a = 10, .l = 202},
-        {.p = 10, .a = 10, .l = 202}
     };
     int n = sizeof(c) / sizeof(*c);
     TorreCartoni(c, n);

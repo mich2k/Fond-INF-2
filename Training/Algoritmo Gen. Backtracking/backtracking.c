@@ -25,10 +25,10 @@ int main(void)
     uint32_t n = 2, nsol = 0;
     uint32_t k = 4;
     /*
-        VALORI POSSIBILI NOTEV  OLI DI k:
-            -   (n+1)   stampe  rà tutte le disposizioni con ripetizione, ovvero  k^(n) soluzioni
-            -   2       stampe  rà soluzioni binarie (1/0), del tipo presenza/assenza
-            -   k       in cas  o volessimo rappresentare (k-1) numeri in uno spazio di n, dovremo dare un input di x
+        VALORI POSSIBILI NOTEVOLI DI k:
+            -   (n+1)   stamperà tutte le disposizioni con ripetizione, ovvero  k^(n) soluzioni
+            -   2       stamperà soluzioni binarie (1/0), del tipo presenza/assenza
+            -   k       in caso volessimo rappresentare (k-1) numeri in uno spazio di n, dovremo dare un input di x
                         EX: 
                           INPUT:  n=  2, k=4:
 
