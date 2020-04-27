@@ -11,6 +11,10 @@ typedef struct{
 void Backtracking(cartone *c, int n, int i, torre *vcurr, torre *vbest, bool *usati)
 {
     if (i == n) {
+        for(int i = 0; i < n; ++i){
+           // printf("%i", vcurr->(c_idsi)+i);
+        }
+        puts("");
         if (vcurr->a > vbest->a) {
             vbest->a = vcurr->a;
             vbest->size = vcurr->size;
