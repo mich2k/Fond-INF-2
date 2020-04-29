@@ -53,6 +53,7 @@ dkms.conf
 
 #compiled files
 *.out
+*.inp
 
 #vscode
 
