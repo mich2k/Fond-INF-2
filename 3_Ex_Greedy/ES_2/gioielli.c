@@ -69,22 +69,20 @@ Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
     uint32_t lines = totlines(f);
     fseek(f, 0, 0);
 
-    Gioiello** x = calloc(lines,sizeof(Gioiello));  // alloco la dimensione di "lines" puntatori a struct
-    for(uint32_t k = 0; k < lines; ++k)
-        x[k] = malloc(sizeof(Gioiello));            // faccio puntare a ogni x[k] una struct di dimensione Gioiello, così creando un array di puntatori allocati
+    Gioiello* x = calloc(lines,sizeof(Gioiello));  
+    Gioiello* curr = calloc(1,sizeof(Gioiello));
     uint32_t i = 0;
-    while (_eof != true)
-        read_line(f, &_eof, x[i]);
-    // inizio
-    bool* result = calloc(lines, sizeof(bool));
     float current = 0;
-    for(uint32_t j = 0; j < lines; ++j){
-        current+=x[j]->prezzo;
-        if(current <= b)
-
+    while (_eof != true){
+        read_line(f, &_eof, curr);
+        if(current + curr->prezzo <= b){
+            current += curr->prezzo;
+            x[i] = *curr;
+            ++i;
+            printf("%d \n", curr->codice);
+        }
     }
-    for(uint32_t k = 0; k < lines; ++k)
-        free(x[k]);
+    
     free(x);
     return x;
 }

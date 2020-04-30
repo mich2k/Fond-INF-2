@@ -8,8 +8,7 @@ int* Monete(int* t, int size, int b) {
     int* ris = calloc(size, sizeof(int));
     uint32_t sum = 0;
     for (int i = 0; i < size; i++) {  // scorre tutte le monete possibili
-        while (sum + t[i] <=
-               b) {  // vede fino a quanto può usare la moneta corrente
+        while (sum + t[i] <= b) {  // vede fino a quanto può usare la moneta corrente
             ris[i] += 1;
             sum += t[i];
         }
