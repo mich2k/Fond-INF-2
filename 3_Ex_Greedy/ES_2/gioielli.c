@@ -1,7 +1,17 @@
 #include "gioielli.h"
 
-Gioiello* read_line(FILE* f, bool* _eof) {
-    Gioiello* x = malloc(sizeof(Gioiello));
+uint32_t totlines(FILE* f) {
+    uint32_t lines = 0;
+    while (true) {
+        char c = fgetc(f);
+        if (c == '\n')
+            ++lines;
+        if (feof(f) || ferror(f))
+            return lines + 1;
+    }
+}
+
+void read_line(FILE* f, bool* _eof, Gioiello* x) {
     uint32_t i;
     uint32_t cont = 1;
     while (true) {
@@ -41,21 +51,38 @@ Gioiello* read_line(FILE* f, bool* _eof) {
         }
         ++cont;
     }
-    return x;
+    return;
 }
 
 Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
     FILE* f = fopen(filename, "r");
+
+    struct foo** fooArray = malloc(sizeof(*fooArray) * 5);
+    struct foo* newFoo = malloc(sizeof(2));
+    fooArray[0] = newFoo;
+    struct foo* newFoo2 = malloc(sizeof(3));
+    fooArray[1] = newFoo2;
+
     if (f == NULL)
         exit(-1);
-    Gioiello x[];
     bool _eof = false;
+    uint32_t lines = totlines(f);
+    fseek(f, 0, 0);
+
+    Gioiello** x = calloc(lines,sizeof(Gioiello));  // alloco la dimensione di "lines" puntatori a struct
+    for(uint32_t k = 0; k < lines; ++k)
+        x[k] = malloc(sizeof(Gioiello));            // faccio puntare a ogni x[k] una struct di dimensione Gioiello, così creando un array di puntatori allocati
     uint32_t i = 0;
     while (_eof != true) {
-        x[i] = read_line(f, &_eof);
+        read_line(f, &_eof, x[i]);
+        /*
+            GREEDY
+        */
         ++i;
     }
-
+    for(uint32_t k = 0; k < lines; ++k)
+        free(x[k]);
+    free(x);
     return x;
 }
 
