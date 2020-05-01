@@ -1,10 +1,21 @@
 #include "gioielli.h"
 
-void _greedysort(Gioiello* x, uint32_t lines){
-    for(uint32_t i = 0; i < lines; ++i){
-        
+/*void _greedysort(Gioiello** x, uint32_t lines) {
+    Gioiello* temp = malloc(sizeof(Gioiello));
+    for (uint32_t i = 0; i < lines - 1; i++) {
+        for (uint32_t j = 0; j < lines - i - 1; j++) {
+            float curr_att = (x[j]->peso / x[j]->prezzo);
+            float curr_succ = (x[j + 1]->peso / x[j + 1]->prezzo);
+            if (curr_att > curr_succ) {
+                // swap arr[j+1] and arr[i]
+                temp = &x[j];
+                x[j] = x[j + 1];
+                x[j + 1] = temp;
+            }
+        }
     }
-}
+    free(temp);
+}*/
 
 uint32_t totlines(FILE* f) {
     uint32_t lines = 0;
@@ -68,29 +79,39 @@ Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
     uint32_t lines = totlines(f);
     fseek(f, 0, 0);
 
-    Gioiello* sorted = calloc(lines,sizeof(Gioiello));  
-    Gioiello* unsorted = calloc(lines,sizeof(Gioiello));  
-    Gioiello* curr = calloc(1,sizeof(Gioiello));
+    //Gioiello* sorted = calloc(lines, sizeof(Gioiello));
+    Gioiello* ris = calloc(lines, sizeof(Gioiello));
+    Gioiello* curr = calloc(1, sizeof(Gioiello));
     uint32_t i = 0;
     float current = 0;
-    while (_eof != true){
+    /*while (_eof != true) {
         read_line(f, &_eof, curr);
-        if(current + curr->prezzo <= b){    //SVOLGIMENTO ALG. GREEDY
-            current += curr->prezzo;
-            sorted[i] = *curr;
-            ++i;
-            printf("%d \n", curr->codice);
-        }
+        unsorted[i] = *curr;
+        i++;
     }
+   // _greedysort(unsorted, lines);*/
     
-    free(sorted);
+    while (_eof != true) {
+        read_line(f, &_eof, curr);
+        if (current + curr->prezzo <= b) {  // SVOLGIMENTO ALG. GREEDY
+            current += curr->prezzo;
+            ris[i] = *curr;
+            ++i;
+        }
+        *ret_size=i;
+    }
+
     free(curr);
-    return sorted;
+    //return sorted;
+    return ris;
 }
 
 int main(void) {
     int retsize;
     const char* filename = "gioielli_1.inp";
-    Gioielli(filename, (float)121, &retsize);
+    Gioiello* ris = Gioielli(filename, (float)121, &retsize);
+    for(uint32_t k = 0; k < retsize; ++k)
+        fprintf(stdout, "\n%d %.2f %.2f", (ris+k)->codice, (ris+k)->peso,(ris+k)->prezzo);
+    puts("");
     return EXIT_SUCCESS;
 }
