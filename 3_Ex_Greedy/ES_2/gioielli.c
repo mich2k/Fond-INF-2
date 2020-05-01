@@ -79,7 +79,7 @@ Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
     uint32_t lines = totlines(f);
     fseek(f, 0, 0);
 
-    //Gioiello* sorted = calloc(lines, sizeof(Gioiello));
+    // Gioiello* sorted = calloc(lines, sizeof(Gioiello));
     Gioiello* ris = calloc(lines, sizeof(Gioiello));
     Gioiello* curr = calloc(1, sizeof(Gioiello));
     uint32_t i = 0;
@@ -90,7 +90,7 @@ Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
         i++;
     }
    // _greedysort(unsorted, lines);*/
-    
+
     while (_eof != true) {
         read_line(f, &_eof, curr);
         if (current + curr->prezzo <= b) {  // SVOLGIMENTO ALG. GREEDY
@@ -98,11 +98,11 @@ Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
             ris[i] = *curr;
             ++i;
         }
-        *ret_size=i;
+        *ret_size = i;
     }
 
     free(curr);
-    //return sorted;
+    // return sorted;
     return ris;
 }
 
@@ -110,8 +110,9 @@ int main(void) {
     int retsize;
     const char* filename = "gioielli_1.inp";
     Gioiello* ris = Gioielli(filename, (float)121, &retsize);
-    for(uint32_t k = 0; k < retsize; ++k)
-        fprintf(stdout, "\n%d %.2f %.2f", (ris+k)->codice, (ris+k)->peso,(ris+k)->prezzo);
+    for (uint32_t k = 0; k < retsize; ++k)
+        fprintf(stdout, "\n%d %.2f %.2f", (ris + k)->codice, (ris + k)->peso,
+                (ris + k)->prezzo);
     puts("");
     return EXIT_SUCCESS;
 }
