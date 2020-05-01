@@ -1,7 +1,5 @@
 #include "gioielli.h"
 
-#include <string.h>
-
 void _greedysort(Gioiello* x, uint32_t lines) {
     Gioiello* temp = malloc(lines * sizeof(Gioiello));
 
