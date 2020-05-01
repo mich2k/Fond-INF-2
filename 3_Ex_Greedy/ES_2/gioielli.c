@@ -1,21 +1,23 @@
 #include "gioielli.h"
 
-/*void _greedysort(Gioiello** x, uint32_t lines) {
-    Gioiello* temp = malloc(sizeof(Gioiello));
-    for (uint32_t i = 0; i < lines - 1; i++) {
-        for (uint32_t j = 0; j < lines - i - 1; j++) {
-            float curr_att = (x[j]->peso / x[j]->prezzo);
-            float curr_succ = (x[j + 1]->peso / x[j + 1]->prezzo);
-            if (curr_att > curr_succ) {
-                // swap arr[j+1] and arr[i]
-                temp = &x[j];
-                x[j] = x[j + 1];
-                x[j + 1] = temp;
+#include <string.h>
+
+void _greedysort(Gioiello* x, uint32_t lines) {
+    Gioiello* temp = malloc(lines * sizeof(Gioiello));
+
+    for (uint32_t i = 0; i < lines; i++) {
+        for (uint32_t j = 0; j < lines - i; j++) {
+            float app_curr = (x + j)->peso / (x + j)->prezzo;
+            float app_next = (x + j + 1)->peso / (x + j + 1)->prezzo;
+            if (app_curr > app_next) {
+                memcpy((temp), (x + j), sizeof(Gioiello));
+                memcpy((x + j), (x + j + 1), sizeof(Gioiello));
+                memcpy((x + j + 1), temp, sizeof(Gioiello));
             }
         }
     }
     free(temp);
-}*/
+}
 
 uint32_t totlines(FILE* f) {
     uint32_t lines = 0;
@@ -78,37 +80,33 @@ Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
     bool _eof = false;
     uint32_t lines = totlines(f);
     fseek(f, 0, 0);
-
-    // Gioiello* sorted = calloc(lines, sizeof(Gioiello));
+    Gioiello* sorted_arr = calloc(lines, sizeof(Gioiello));
     Gioiello* ris = calloc(lines, sizeof(Gioiello));
-    Gioiello* curr = calloc(1, sizeof(Gioiello));
-    uint32_t i = 0;
+    Gioiello* curr = malloc(sizeof(Gioiello));
     float current = 0;
-    /*while (_eof != true) {
-        read_line(f, &_eof, curr);
-        unsorted[i] = *curr;
-        i++;
-    }
-   // _greedysort(unsorted, lines);*/
-
+    uint32_t cont = 0;
+    int i=0;
     while (_eof != true) {
         read_line(f, &_eof, curr);
-        if (current + curr->prezzo <= b) {  // SVOLGIMENTO ALG. GREEDY
-            current += curr->prezzo;
-            ris[i] = *curr;
-            ++i;
-        }
-        *ret_size = i;
+        sorted_arr[i] = *curr;
+        i++;
     }
-
-    free(curr);
-    // return sorted;
+    _greedysort(sorted_arr, lines);
+    for (i = lines - 1; i >= 0; --i) {
+        if (current + (sorted_arr + i)->prezzo <= b) {  // SVOLGIMENTO ALG. GREEDY
+            current += (sorted_arr + i)->prezzo;
+            ris[cont] = sorted_arr[i];
+            ++cont;
+        }
+        *ret_size = cont;
+    }
+    ris = realloc(ris, *ret_size * sizeof(Gioiello));
     return ris;
 }
 
 int main(void) {
     int retsize;
-    const char* filename = "gioielli_1.inp";
+    const char* filename = "gioielli_2.inp";
     Gioiello* ris = Gioielli(filename, (float)121, &retsize);
     for (uint32_t k = 0; k < retsize; ++k)
         fprintf(stdout, "\n%d %.2f %.2f", (ris + k)->codice, (ris + k)->peso,
