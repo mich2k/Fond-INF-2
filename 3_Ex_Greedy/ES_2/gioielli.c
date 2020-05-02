@@ -27,7 +27,6 @@ uint32_t totlines(FILE* f) {
             return lines + 1;
     }
 }
-
 void read_line(FILE* f, bool* _eof, Gioiello* x) {
     uint32_t i;
     uint32_t cont = 1;
@@ -74,7 +73,7 @@ void read_line(FILE* f, bool* _eof, Gioiello* x) {
 Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
     FILE* f = fopen(filename, "r");
     if (f == NULL)
-        exit(-1);
+        return NULL;
     bool _eof = false;
     uint32_t lines = totlines(f);
     fseek(f, 0, 0);
