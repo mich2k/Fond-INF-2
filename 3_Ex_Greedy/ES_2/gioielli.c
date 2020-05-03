@@ -2,7 +2,6 @@
 
 void _greedysort(Gioiello* x, uint32_t lines) {
     Gioiello* temp = malloc(lines * sizeof(Gioiello));
-
     for (uint32_t i = 0; i < lines; i++) {
         for (uint32_t j = 0; j < lines - i; j++) {
             float app_curr = (x + j)->peso / (x + j)->prezzo;
@@ -24,57 +23,7 @@ uint32_t totlines(FILE* f) {
         if (c == '\n')
             ++lines;
         if (feof(f) || ferror(f))
-            return lines + 1;
-    }
-}
-void read_line(FILE* f, bool* _eof, Gioiello* x) {
-    uint32_t i;
-    uint32_t cont = 1;
-    while (true) {
-        char isvalid = fgetc(f);
-        if (cont != 1 && !(isprint(isvalid)) || (feof(f) || ferror(f))) {
-            if (isvalid == '\n')
-                break;
-            else if (feof(f) || ferror(f)) {
-                *_eof = true;
-                break;
-            }
-        } else
-            fseek(f, -1, SEEK_CUR);
-        char* s = NULL;
-        i = 0;
-        while (true) {
-            char c = fgetc(f);
-            if(c == '\n')
-                c = fgetc(f);
-            if (!(isprint(c)) || c == ' ')
-                break;
-            if ((feof(f) || ferror(f))) {
-                *_eof = true;
-                break;
-            }
-            //fseek(f, -1, SEEK_CUR);
-            s = realloc(s, i + 1);
-            s[i] = c;
-            ++i;
-        }
-        switch (cont) {
-            case 1:
-                x->codice = (int)strtol(s, NULL, 10);
-                free(s);
-                break;
-            case 2:
-                x->peso = (float)strtod(s, NULL);
-                free(s);
-                break;
-            case 3:
-                x->prezzo = (float)strtod(s, NULL);
-                free(s);
-                return;
-            default:
-                exit(-1);
-        }
-        ++cont;
+            return lines;
     }
 }
 
@@ -82,31 +31,30 @@ Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
     FILE* f = fopen(filename, "r");
     if (f == NULL)
         return NULL;
-    bool _eof = false;
     uint32_t lines = totlines(f);
     fseek(f, 0, 0);
-    Gioiello* sorted_arr = malloc(lines * sizeof(Gioiello));
-    Gioiello* ris = malloc(lines * sizeof(Gioiello));
-    Gioiello* curr = malloc(sizeof(Gioiello));
+    Gioiello* sorted_arr = calloc(lines , sizeof(Gioiello));
+    Gioiello* ris = calloc(lines , sizeof(Gioiello));
+    Gioiello* curr = calloc(1,sizeof(Gioiello));
     float current = 0;
     uint32_t cont = 0;
     int i = 0;
-    while (_eof != true) {
-        read_line(f, &_eof, curr);
+    for (;i <= lines-1; ++i ) {
+        fscanf(f, "%i %f %f", &curr->codice, &curr->peso, &curr->prezzo);
         sorted_arr[i] = *curr;
-        i++;
     }
+    free(curr);
     //_greedysort(sorted_arr, lines);
     for (i = lines - 1; i >= 0; --i) {
-        if (current + (sorted_arr + i)->prezzo <=
-            b) {  // SVOLGIMENTO ALG. GREEDY
+        if (current + (sorted_arr + i)->prezzo <= b) {  // SVOLGIMENTO ALG. GREEDY
             current += (sorted_arr + i)->prezzo;
-            ris[cont] = sorted_arr[i];
-            ++cont;
+            ris[cont++] = sorted_arr[i];
         }
-        *ret_size = cont;
     }
-    ris = realloc(ris, *ret_size * sizeof(Gioiello));
+    free(sorted_arr);
+    //ris = realloc(ris, (*ret_size) * sizeof(Gioiello));
+    *ret_size = cont;
+    fclose(f);
     return ris;
 }
 
