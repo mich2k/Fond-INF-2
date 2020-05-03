@@ -1,9 +1,11 @@
 #include "gioielli.h"
 
 void _greedysort(Gioiello* x, uint32_t lines) {
-    Gioiello* temp = malloc(lines * sizeof(Gioiello));
+    Gioiello* temp = calloc(lines, sizeof(Gioiello));
     for (uint32_t i = 0; i < lines; i++) {
         for (uint32_t j = 0; j < lines - i; j++) {
+            if(j+1 > lines)
+                continue;
             float app_curr = (x + j)->peso / (x + j)->prezzo;
             float app_next = (x + j + 1)->peso / (x + j + 1)->prezzo;
             if (app_curr > app_next) {
@@ -44,7 +46,7 @@ Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
         sorted_arr[i] = *curr;
     }
     free(curr);
-    //_greedysort(sorted_arr, lines);
+    _greedysort(sorted_arr, lines);
     for (i = lines - 1; i >= 0; --i) {
         if (current + (sorted_arr + i)->prezzo <= b) {  // SVOLGIMENTO ALG. GREEDY
             current += (sorted_arr + i)->prezzo;
