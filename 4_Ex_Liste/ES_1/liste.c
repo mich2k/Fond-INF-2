@@ -1,4 +1,4 @@
- #include <ctype.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include "list_int.h"
 
@@ -25,7 +25,7 @@ Item* LoadList(const char* filename) {
 
 int main(void) {
     char* filename =
-        "/home/mich/Scrivania/UNI/Fond-INF-2/Training/Struttura_Gen_Liste/data_00.inp";
+        "/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/ES_1/data_00.inp";
     Item* out = LoadList(filename);
     WriteStdoutList(out);
     //_CrtDumpMemoryLeaks();
