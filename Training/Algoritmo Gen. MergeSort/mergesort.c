@@ -1,4 +1,3 @@
-
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,9 +35,9 @@ void mergeSort(int* v, int first, int last, int size) {
     int mid;
     if (first < last) {
         mid = (last + first) / 2;
-        mergeSort(v, first, mid, size);
-        mergeSort(v, mid + 1, last, size);
-        _merge(v, first, mid + 1, last, size);
+        mergeSort(v, first, mid, size);     // partizion
+        mergeSort(v, mid + 1, last, size);  // partizion
+        _merge(v, first, mid + 1, last, size);  // merge
     }
 }
 
