@@ -62,7 +62,7 @@ Gioiello* Gioielli(const char* filename, float b, int* ret_size) {
 
 int main(void) {
     int retsize;
-    const char* filename = "gioielli_2.inp";
+    const char* filename = "/home/mich/Scrivania/UNI/Fond-INF-2/3_Ex_Greedy/ES_2/gioielli_2.inp";
     Gioiello* ris = Gioielli(filename, (float)121, &retsize);
     for (uint32_t k = 0; k < retsize; ++k)
         fprintf(stdout, "\n%d %.2f %.2f", (ris + k)->codice, (ris + k)->peso,
