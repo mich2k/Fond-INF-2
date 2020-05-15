@@ -26,9 +26,9 @@ void naive_sorting(int* arr, int n) {
     }
 }
 /**
-    * ! blocca un pivot che viene
-    * ! operativamente incrementato
-*/
+ * ! blocca un pivot che viene
+ * ! operativamente incrementato
+ */
 
 int main(void) {
     int arr[] = {4, 3, 2, 1};

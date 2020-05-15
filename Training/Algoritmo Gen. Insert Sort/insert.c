@@ -1,6 +1,12 @@
 #include <stdint.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+void swap(int* first, int* second) {
+    int temp = *first;
+    *first = *second;
+    *second = temp;
+}
 
 void display(int* arr, int n) {
     for (int i = 0; i < n; i++)
@@ -9,19 +15,18 @@ void display(int* arr, int n) {
 }
 
 void insertion_sort(int* arr, int n) {
-    int i, j, key;
-    for(i = 0; i < n; i++) {
-        j = i - 1;
-        key = arr[i];
-        /* Move all elements greater than key to one position */
-        while(j >= 0 && key < arr[j]) {
-            arr[j + 1] = arr[j];
-            j = j - 1;
+    for (int i = 1; i <= n - 1; ++i) {
+        int j = i;
+        while (j > 0 && arr[j - 1] > arr[j]) {
+            swap(&arr[j], &arr[j - 1]);
+            j -= 1;
         }
-        /* Find a correct position for key */
-        arr[j + 1] = key;
     }
 }
+/**
+ * ! posiziona ogni elemento nella
+ * ! posizione giusta alla i esima iterazione
+*/
 
 int main(void) {
     int arr[] = {4, 3, 2, 1};

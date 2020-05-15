@@ -1,7 +1,7 @@
 
 #include <stdint.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void display(int* arr, int n) {
     for (int i = 0; i < n; i++)
@@ -9,20 +9,17 @@ void display(int* arr, int n) {
     puts("");
 }
 
-void swap(int *first, int *second){
-    
+void swap(int* first, int* second) {
     int temp = *first;
     *first = *second;
     *second = temp;
-    
 }
 
-void bubble_sort(int* arr, int n){
-    
-    for(int i=0; i<n-1; i++) {
-        for(int j=0; j<n-1-i; j++) {
-            if(arr[j]>arr[j+1]) {
-                swap(&arr[j], &arr[j+1]);
+void bubble_sort(int* arr, int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(&arr[j], &arr[j + 1]);
             }
         }
     }
@@ -31,7 +28,7 @@ void bubble_sort(int* arr, int n){
 /**
  *! peggio del naive sort, confronta coppie di elementi alla volta
  *! spingendo in fondo i valori più grandi
-*/ 
+ */
 int main(void) {
     int arr[] = {4, 3, 2, 1};
     int n = sizeof(arr) / sizeof(*arr);
