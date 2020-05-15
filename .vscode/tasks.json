@@ -7,7 +7,9 @@
 			"command": "/usr/bin/clang",			 // COMPILER
 			"args": [
 				"-g",
-				"${file}",	//	"${fileDirname}/*.c"	+	*.h files
+				"${fileDirname}/*.c",
+				//"${file}",	//	"${fileDirname}/*.c"	+	*.h files
+				//"${fileDirname}/*.h",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}.out"
 			],
