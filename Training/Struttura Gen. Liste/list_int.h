@@ -218,4 +218,3 @@ void WriteList(const Item *i, FILE *f);
 void WriteStdoutList(const Item *i);
 
 #endif // LIST_INT_H_
-
