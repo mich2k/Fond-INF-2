@@ -34,32 +34,6 @@ void quick_sort(int* v, int first, int last) {
         quick_sort(v, i, last);
     }
 }
-/*
-void quickSort(int v[], int first, int last) {
-    int i, j, pivot;
-    if (first < last) {
-        i = first;
-        j = last;
-        pivot = v[(first + last) / 2];
-        do {
-            while (v[i] < pivot)
-                i++;
-            while (v[j] > pivot)
-                j--;
-            if (i <= j) {
-                scambia(&v[i], &v[j]);
-                i++, j--;
-            }
-        } while (i <= j);
-        quickSort(v, first, j);
-        quickSort(v, i, last);
-    }
-}*/
-// ? void quicksort(int* arr, int n) {}
-/**
- * ! posiziona ogni elemento nella
- * ! posizione giusta alla i esima iterazione
- */
 
 int main(void) {
     int arr[] = {4, 3, 2, 1};

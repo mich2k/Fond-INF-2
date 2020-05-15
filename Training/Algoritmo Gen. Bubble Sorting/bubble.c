@@ -29,6 +29,7 @@ void bubble_sort(int* arr, int n) {
  *! peggio del naive sort, confronta coppie di elementi alla volta
  *! spingendo in fondo i valori più grandi
  */
+
 int main(void) {
     int arr[] = {4, 3, 2, 1};
     int n = sizeof(arr) / sizeof(*arr);
