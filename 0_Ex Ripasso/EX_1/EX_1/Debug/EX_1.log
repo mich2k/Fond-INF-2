@@ -1,8 +1,0 @@
-﻿  main.c
-C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\EX_1\EX_1\main.c(23,27): warning C4047: 'funzione': 'int' differisce da 'char *' nei livelli di riferimento indiretto
-C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\EX_1\EX_1\main.c(23,27): warning C4024: 'tolower': tipi diversi tra il parametro 1 formale e quello effettivo
-C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\EX_1\EX_1\main.c(24,27): warning C4047: 'funzione': 'int' differisce da 'char *' nei livelli di riferimento indiretto
-C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\EX_1\EX_1\main.c(24,27): warning C4024: 'tolower': tipi diversi tra il parametro 1 formale e quello effettivo
-C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\EX_1\EX_1\main.c(23,1): warning C4047: 'inizializzazione': 'char *' differisce da 'int' nei livelli di riferimento indiretto
-C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\EX_1\EX_1\main.c(24,1): warning C4047: 'inizializzazione': 'char *' differisce da 'int' nei livelli di riferimento indiretto
-  EX_1.vcxproj -> C:\Users\Michele\Desktop\Fondamenti 2\Ex Ripasso\EX_1\Debug\EX_1.exe
