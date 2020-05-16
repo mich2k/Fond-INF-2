@@ -15,13 +15,13 @@ Item* LoadList(const char* filename) {
     fseek(f, -1, SEEK_CUR);
     Item* list = CreateEmptyList();
     ElemType x;
-    size_t ret, i = 0;
-    do {
-        ret = fscanf(f, " %d", &x);
-        if (ret != 1)
+    size_t i = 0;
+    while(true) {
+        x = ReadElem(f);
+        if (feof(f) || ferror(f))
             break;
         list = InsertHeadList(&x, list);
-    } while (true);
+    }
     return list;
 }
 
