@@ -1,7 +1,6 @@
 #include <ctype.h>
 #include <stdint.h>
 #include <stdlib.h>
-
 #include "list_int.h"
 
 Item* LoadList(const char* filename) {
@@ -15,12 +14,11 @@ Item* LoadList(const char* filename) {
     fseek(f, -1, SEEK_CUR);
     Item* list = CreateEmptyList();
     ElemType x;
-    size_t i = 0;
-    while(true) {
+    while (true) {
         x = ReadElem(f);
+        list = InsertHeadList(&x, list);
         if (feof(f) || ferror(f))
             break;
-        list = InsertHeadList(&x, list);
     }
     return list;
 }
