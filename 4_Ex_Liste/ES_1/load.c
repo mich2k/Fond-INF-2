@@ -19,6 +19,7 @@ Item* LoadList(const char* filename) {
         if (feof(f) || ferror(f))
             break;
     }
+    fclose(f);
     return list;
 }
 

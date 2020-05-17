@@ -20,15 +20,15 @@ Item* LoadList(const char* filename) {
         if (feof(f) || ferror(f))
             break;
     }
+    fclose(f);
     return list;
 }
 
 ElemType MaxElement(const Item* i) {
-    ElemType* max;
-    max = &i->value;
+    ElemType* max = (int*)&i->value;
     while (!IsEmptyList(i)) {
         if (ElemCompare(max, &i->value) < 0)
-            *max = i->value;  // OR: max = &i->value;
+            *max = i->value;
         i = GetTailList(i);
     }
     return *max;
