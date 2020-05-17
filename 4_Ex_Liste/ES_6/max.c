@@ -36,7 +36,7 @@ ElemType MaxElement(const Item* i) {
 
 int main(void) {
     char* filename =
-        "/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/ES_6/data_00.inp";
+        "/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_00.inp";
     Item* out = LoadList(filename);
     ElemType max = MaxElement(out);
     WriteStdoutList(out);

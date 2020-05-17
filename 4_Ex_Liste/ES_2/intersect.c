@@ -47,8 +47,8 @@ Item* Intersect(const Item* i1, const Item* i2) {
 
 int main(void) {
     Item* first = LoadList(
-        "/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/ES_2/data_00.inp");
+        "/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_00.inp");
     Item* second = LoadList(
-        "/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/ES_2/data_01.inp");
+        "/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_01.inp");
     Intersect(first, second);
 }
