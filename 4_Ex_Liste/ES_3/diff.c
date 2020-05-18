@@ -61,7 +61,7 @@ int main(void) {
     Item* first =
         LoadList("/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_00.inp");
     Item* second =
-        LoadList("/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_01.inp");
+        LoadList("/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_02.inp");
     Diff(first, second);
     return EXIT_SUCCESS;
 }
