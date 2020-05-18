@@ -35,9 +35,8 @@ bool Lookup(const Item* list, ElemType* x) {
     return false;
 }
 
-Item* ElemAdd(const ElemType *e, Item* i)
-{
-    Item *t = calloc(1,sizeof(Item));
+Item* ElemAdd(const ElemType* e, Item* i) {
+    Item* t = calloc(1, sizeof(Item));
     t->value = ElemCopy(e);
     t->next = i;
     return t;
@@ -49,11 +48,9 @@ Item* Diff(const Item* i1, const Item* i2) {
     Item* ris_list = NULL;
     size_t i = 0;
     while (i1) {
-        ElemType* current_value = (ElemType*)&i1->value; // ReadElem(i1);
-        if (!Lookup(i2, current_value)) {
-             ris_list=InsertHeadList(current_value, ris_list);
-            //ris_list = ElemAdd(current_value, ris_list);
-        }
+        ElemType* current_value = (ElemType*)&i1->value;  // ReadElem(i1);
+        if (!Lookup(i2, current_value))
+            ris_list = ElemAdd(current_value, ris_list);
         i1 = i1->next;
     }
     WriteStdoutList(ris_list);
