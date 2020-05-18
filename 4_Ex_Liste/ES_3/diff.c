@@ -2,7 +2,6 @@
 #include <stdlib.h>
 // stdbool.h già definita in list_int.h
 #include "list_int.h"
-
 // ! NO PRIMITIVE ALLOWD
 
 Item* LoadList(const char* filename) {
