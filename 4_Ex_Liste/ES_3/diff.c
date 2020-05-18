@@ -5,8 +5,6 @@
 
 // ! NO PRIMITIVE ALLOWD
 
-typedef int Element;
-
 Item* LoadList(const char* filename) {
     FILE* f = fopen(filename, "r");
     if (f == NULL)
@@ -28,9 +26,9 @@ Item* LoadList(const char* filename) {
     return list;
 }
 
-bool Lookup(const Item* list, Element* x) {
+bool Lookup(const Item* list, ElemType* x) {
     while (list) {
-        if (*x == (Element)list->value)
+        if (*x == (ElemType)list->value)
             return true;
         list = list->next;
     }
@@ -43,12 +41,9 @@ Item* Diff(const Item* i1, const Item* i2) {
     Item* ris_list = NULL;
     size_t i = 0;
     while (i1) {
-        Element* current_value = (Element*)&i1->value;
+        ElemType* current_value = (ElemType*)&i1->value;
         if (!Lookup(i2, current_value)) {
-            ris_list = calloc(i + 1, sizeof(Item));
-            ris_list->value = *current_value;
-            ris_list->next = (ris_list + i);
-            i += 1;
+            ris_list=InsertHeadList(current_value, ris_list);
         }
         i1 = i1->next;
     }
