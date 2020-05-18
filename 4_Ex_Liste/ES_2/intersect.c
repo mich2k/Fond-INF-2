@@ -49,4 +49,5 @@ int main(void) {
     Item* second = LoadList(
         "/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_01.inp");
     Intersect(first, second);
+    return EXIT_SUCCESS;
 }
