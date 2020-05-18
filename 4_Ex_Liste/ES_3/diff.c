@@ -1,9 +1,11 @@
 #include <ctype.h>
 #include <stdlib.h>
-
+// stdbool.h già definita in list_int.h
 #include "list_int.h"
 
 // ! NO PRIMITIVE ALLOWD
+
+typedef int Element;
 
 Item* LoadList(const char* filename) {
     FILE* f = fopen(filename, "r");
@@ -26,14 +28,32 @@ Item* LoadList(const char* filename) {
     return list;
 }
 
+bool Lookup(const Item* list, Element* x) {
+    while (list) {
+        if (*x == (Element)list->value)
+            return true;
+        list = list->next;
+    }
+    return false;
+}
+
 Item* Diff(const Item* i1, const Item* i2) {
     if (i1 == NULL || i2 == NULL)
         return NULL;
     Item* ris_list = NULL;
-    while(true){
-        
+    size_t i = 0;
+    while (i1) {
+        Element* current_value = (Element*)&i1->value;
+        if (!Lookup(i2, current_value)) {
+            ris_list = calloc(i + 1, sizeof(Item));
+            ris_list->value = *current_value;
+            ris_list->next = (ris_list + i);
+            i += 1;
+        }
+        i1 = i1->next;
     }
-    
+    WriteStdoutList(ris_list);
+    return ris_list;
 }
 
 int main(void) {
