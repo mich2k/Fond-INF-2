@@ -42,10 +42,9 @@ Item* ElemAdd(const ElemType* e, Item* i) {
 }
 
 Item* Diff(const Item* i1, const Item* i2) {
-    if (i1 == NULL || i2 == NULL)
+    if (i1 == NULL)
         return NULL;
     Item* ris_list = NULL;
-    size_t i = 0;
     while (i1) {
         ElemType* current_value = (ElemType*)&i1->value;  // ReadElem(i1);
         if (!Lookup(i2, current_value))
@@ -58,9 +57,9 @@ Item* Diff(const Item* i1, const Item* i2) {
 
 int main(void) {
     Item* first =
-        LoadList("/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_00.inp");
-    Item* second =
         LoadList("/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_02.inp");
+    Item* second =
+        LoadList("/home/mich/Scrivania/UNI/Fond-INF-2/4_Ex_Liste/data_03.inp");
     Diff(first, second);
     return EXIT_SUCCESS;
 }
