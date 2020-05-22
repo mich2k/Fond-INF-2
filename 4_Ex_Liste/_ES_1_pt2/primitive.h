@@ -183,7 +183,13 @@ void WriteStdoutList(const Item *i);
 //  FUNZIONI address_book.c
 
 const ElemType* Find(const Item*, const char*);
-
+Item* recDelete(const ElemType* e, Item* i);
+Item* Delete(Item* i, const char* name);
+void list_bubble_sort(char** arr, size_t n);
+Item* Sort(Item* i);
+Item* Filtra(Item* i, const char* city);
+Item* Reverse(const Item* l);
+Item* Append(const Item* l1, const Item* l2);
 
 
 #endif // PRIMITIVE_H

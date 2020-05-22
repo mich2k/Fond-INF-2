@@ -110,21 +110,38 @@ Item* Filtra(Item* i, const char* city) {
     return ris;
 }
 
-Item* Reverse(const Item* l){
-    
+Item* Reverse(const Item* l) {
+    Item* ris = CreateEmptyList();
+    while (!IsEmptyList(l)) {
+        ris = InsertHeadList(&l->value, ris);
+        l = GetTailList(l);
+    }
+    return ris;
 }
-/*
 
-    struct Address {
-        char name[40];
-        char street[50];
-        int number;
-        char city[30];
-        char province[3];
-        char postal_code[6];
-    };
+Item* Append(const Item* l1, const Item* l2) {
+    if (IsEmptyList(l1) && IsEmptyList(l2))
+        return (Item*)NULL;
+    if (IsEmptyList(l1)) {
+        Item* tmp = CreateEmptyList();
+        while (!IsEmptyListI(l2)) {
+            tmp = InsertBackList(tmp, &l2->value);
+            l2 = GetTailList(l2);
+        }
+        return tmp;
+    }
+    Item* tmp =
+        InsertHeadList(GetHeadValueList(l1), Append(GetTailList(l1), l2));
+    return tmp;
+}
 
-*/
+Item* AppendMod(Item* l1, Item* l2) {
+    if (IsEmptyList(l1) && IsEmptyList(l2))
+        return (Item*)NULL;
+    if (IsEmptyList(l1))
+        return l2;
+    Item* tmp = InsertHeadList(GetHeadValueList(l1), Append(GetTailList(l1), l2));
+}
 
 int main(void) {
     // ElemType* e1 = {"Gennaro", "a", 1, "napoli", "NAP", "83100"};
@@ -138,6 +155,7 @@ int main(void) {
     Find(i, "Gennaro");
     // i = Delete(i, "Pasqua");
     // Sort(i);
-    Item* ris = Filtra(i, "Napoli");
+    Item* ris = Reverse(i);
+
     return EXIT_SUCCESS;
 }
