@@ -9,7 +9,7 @@ const ElemType* Find(const Item* i, const char* name) {
         return NULL;
     char* curr_name = NULL;
     while (true) {
-        curr_name = realloc(curr_name,40 * sizeof(char));
+        curr_name = realloc(curr_name, 40 * sizeof(char));
         memcpy(curr_name, &(i->value).name, 40);
         if (strcmp(name, curr_name) == 0) {
             free(curr_name);
@@ -30,7 +30,8 @@ Item* recDelete(const ElemType* e, Item* i) {
         free(i);
         return tmp;
     }
-    Item* tmp = InsertHeadList(GetHeadValueList(i), recDelete(e, GetTailList(i)));
+    Item* tmp =
+        InsertHeadList(GetHeadValueList(i), recDelete(e, GetTailList(i)));
     free(i);
     return tmp;
 }
@@ -39,12 +40,52 @@ Item* Delete(Item* i, const char* name) {
     if (IsEmptyList(i)) {
         return i;
     }
-    ElemType* e = (ElemType*) Find(i, name);
+    ElemType* e = (ElemType*)Find(i, name);
     Item* tmp = recDelete(e, i);
     return tmp;
 }
 
+void list_bubble_sort(char** arr, size_t n) {
+    if (!arr || n <= 1)
+        return;
+    char* temp = malloc(sizeof(char) * 40);
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (j + 1 >= n) {
+                free(temp);
+                break;
+            }
+            char* s1 = arr[j];
+            char* s2 = arr[j + 1];
+            if (strcmp(s1, s2) > 0) {
+                strcpy(temp, *(arr + j));
+                strcpy(*(arr) + j, *(arr + j + 1));
+                strcpy(*(arr + j + 1), temp);
+            }
+        }
+    }
+    free(temp);
+}
 
+Item* Sort(Item* i) {
+    if (IsEmptyList(i))
+        return i;
+    char** arr = NULL;
+    size_t cont = 0, len = 0;
+    while (!IsEmptyList(i)) {
+        len = strlen(&i->value.name);
+        arr = realloc(arr, cont + 1);
+        arr[cont] = realloc(arr[cont], sizeof(char) * len);
+        memcpy(arr[cont], &i->value.name, len);
+        ++cont;
+        i = GetTailList(i);
+    }
+    list_bubble_sort(arr, cont);
+    DeleteList(i);
+    for(size_t r = 0; r < cont; r+=1){
+        
+    }
+}
 /*
 
     struct Address {
@@ -68,6 +109,7 @@ int main(void) {
     i = InsertHeadList(&e1, i);
     i = InsertHeadList(&e2, i);
     Find(i, "Gennaro");
-    i = Delete(i, "Pasqua");
+    // i = Delete(i, "Pasqua");
+    Sort(i);
     return EXIT_SUCCESS;
 }
