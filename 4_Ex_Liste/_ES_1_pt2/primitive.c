@@ -14,10 +14,15 @@
       char postal_code[6];
   };
 */
+enum var_types{_is_int = 1, _is_char};
 
-    int ElemCompare(const ElemType* e1, const ElemType* e2) {
-    return (*e1 > *e2) - (*e1 < *e2);
+int ElemCompare(const ElemType* e1, const ElemType* e2) {
+    uint8_t len = 6; // struct elements
+
+    for(uint8_t len = 6; )
+
 }
+
 
 ElemType ElemCopy(const ElemType* e) {
     return *e;
