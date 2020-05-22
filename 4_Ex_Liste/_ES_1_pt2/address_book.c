@@ -82,17 +82,20 @@ Item* Sort(Item* i) {
         i = GetTailList(i);
     }
     list_bubble_sort(arr, cont);
-    //DeleteList(i);
     i = first_elem_pointer;
     Item* copy = CreateEmptyList();
     for(size_t j = 0; j < cont; ++j){
-        //ElemType tmp = ElemCopy(*copy->next);
-        copy = InsertHeadList(&i->value, copy->next );
+        copy = InsertHeadList(&i->value, copy);
+        i = GetTailList(i);
     }
     for(size_t r = 0; r < cont; r+=1){
         char* s = arr[r];
         i = InsertBackList(i, Find( copy, s));
     }
+    //DeleteList(copy);
+    for(size_t r = 0; r < cont; r+=1)
+        free(arr[r]);
+    free(arr);
     return i;
 }
 /*
@@ -112,8 +115,8 @@ int main(void) {
     // ElemType* e1 = {"Gennaro", "a", 1, "napoli", "NAP", "83100"};
     // ElemType* e2 = {"Pasqua", "pasqale", 1, "napoli", "NAP", "83100"};
 
-    ElemType e1 = {"Gennaro", "via garibaldi", 1212, "Napoli", "nap", "1211"};
-    ElemType e2 = {"Pasqua", "via garibaldi", 1111, "Napoli", "nap", "1211"};
+    ElemType e1 = {"Pasqua", "via garibaldi", 1212, "Napoli", "nap", "1211"};
+    ElemType e2 = {"Gennaro", "via garibaldi", 1111, "Napoli", "nap", "1211"};
     Item* i = CreateEmptyList();
     i = InsertHeadList(&e1, i);
     i = InsertHeadList(&e2, i);
