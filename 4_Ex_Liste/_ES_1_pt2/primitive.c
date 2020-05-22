@@ -14,21 +14,48 @@
       char postal_code[6];
   };
 */
-enum var_types{_is_int = 1, _is_char};
 
-int ElemCompare(const ElemType* e1, const ElemType* e2) {
-    uint8_t len = 6; // struct elements
-
-    for(uint8_t len = 6; )
-
+bool ElemCompare(const ElemType* e1, const ElemType* e2) {
+    if (strcmp(e1->name, e2->name) != 0 ||
+        strcmp(e1->street, e2->street) != 0 || e1->number != e2->number ||
+        strcmp(e1->city, e2->city) != 0 ||
+        strcmp(e1->province, e2->province) != 0 ||
+        strcmp(e1->postal_code, e2->postal_code) != 0)
+        return false;
+    else
+        return true;
 }
-
 
 ElemType ElemCopy(const ElemType* e) {
-    return *e;
+    ElemType temp;
+    ElemType* null = NULL;
+    if (!e)
+        return *null;
+    void* p;
+    p = strcpy(temp.name, e->name);
+    if (!p)
+        return *null;
+    p = strcpy(temp.street, e->street);
+    if(!(e->number))
+        return *null;
+    temp.number = e->number;
+    p = strcpy(temp.city, e->city);
+    if (!p)
+        return *null;
+    p = strcpy(temp.province, e->province);
+    if (!p)
+        return *null;
+    p = strcpy(temp.postal_code, e->postal_code);
+    if (!p)
+        return *null;
+    return temp;
 }
 
-void ElemDelete(ElemType* e) {}
+void ElemDelete(ElemType* e) {
+    ElemType* null = NULL;
+    *e = *null;
+    return;
+}
 
 int ReadElem(FILE* f, ElemType* e) {
     return fscanf(f, "%d", e);

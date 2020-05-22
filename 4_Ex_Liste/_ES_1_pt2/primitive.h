@@ -3,12 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <stdint.h>
-
-//  FUNZIONI address_book.c
-
-const ElemType* Find(const Item*, const char*);
-
 
 
 // FUNZIONI traccia
@@ -40,7 +36,7 @@ typedef struct Address ElemType;
          -  0 se i contenuti dei due elementi sono uguali
          -  1 se il contenuto del primo e' maggiore di quello del secondo;
 */
-int ElemCompare(const ElemType *e1, const ElemType *e2);
+bool ElemCompare(const ElemType *e1, const ElemType *e2);
 
 /** @brief La funzione ElemCopy crea e ritorna una copia dell'elemento dato.
 @param[in] e Puntatore all'elemento da copiare. Il valore contenuto in e non 
@@ -178,5 +174,16 @@ void WriteList(const Item *i, FILE *f);
 @return Non ci sono valori di ritorno.
 */
 void WriteStdoutList(const Item *i);
+
+
+
+
+
+
+//  FUNZIONI address_book.c
+
+const ElemType* Find(const Item*, const char*);
+
+
 
 #endif // PRIMITIVE_H
