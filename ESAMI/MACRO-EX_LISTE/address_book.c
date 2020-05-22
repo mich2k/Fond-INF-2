@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-
 #include "primitive.h"
 
 const ElemType* Find(const Item* i, const char* name) {
@@ -103,7 +102,7 @@ Item* Filtra(Item* i, const char* city) {
         return i;
     Item* ris = CreateEmptyList();
     while (!IsEmptyList(i)) {
-        if (strcmp(&i->value.city, city) == 0)
+        if (strcmp((const char*)&i->value.city, city) == 0)
             ris = InsertHeadList(&i->value, ris);
         i = GetTailList(i);
     }
@@ -111,6 +110,8 @@ Item* Filtra(Item* i, const char* city) {
 }
 
 Item* Reverse(const Item* l) {
+    if (IsEmptyList(l))
+        return (Item*)NULL;
     Item* ris = CreateEmptyList();
     while (!IsEmptyList(l)) {
         ris = InsertHeadList(&l->value, ris);
@@ -124,7 +125,7 @@ Item* Append(const Item* l1, const Item* l2) {
         return (Item*)NULL;
     if (IsEmptyList(l1)) {
         Item* tmp = CreateEmptyList();
-        while (!IsEmptyListI(l2)) {
+        while (!IsEmptyList(l2)) {
             tmp = InsertBackList(tmp, &l2->value);
             l2 = GetTailList(l2);
         }
@@ -140,22 +141,21 @@ Item* AppendMod(Item* l1, Item* l2) {
         return (Item*)NULL;
     if (IsEmptyList(l1))
         return l2;
-    Item* tmp = InsertHeadList(GetHeadValueList(l1), Append(GetTailList(l1), l2));
+    Item* tmp =
+        InsertHeadList(GetHeadValueList(l1), Append(GetTailList(l1), l2));
+    free(l1);
+    return tmp;
 }
 
 int main(void) {
-    // ElemType* e1 = {"Gennaro", "a", 1, "napoli", "NAP", "83100"};
-    // ElemType* e2 = {"Pasqua", "pasqale", 1, "napoli", "NAP", "83100"};
-
-    ElemType e1 = {"Pasqua", "via garibaldi", 1212, "Napoli", "nap", "1211"};
-    ElemType e2 = {"Gennaro", "via garibaldi", 1111, "Napoli", "nap", "1211"};
+    ElemType e1 = {"Mario", "via garibaldi", 1212, "Bologna", "AAA", "1234"};
+    ElemType e2 = {"Giuseppe", "via europa", 1111, "Torino", "BBB", "4311"};
     Item* i = CreateEmptyList();
     i = InsertHeadList(&e1, i);
     i = InsertHeadList(&e2, i);
-    Find(i, "Gennaro");
-    // i = Delete(i, "Pasqua");
-    // Sort(i);
-    Item* ris = Reverse(i);
-
+    Item* i2 = CreateEmptyList();
+    i2 = InsertHeadList(&e1, i2);
+    i2 = InsertHeadList(&e2, i2);
+    Item* ris = Append(i, i2);
     return EXIT_SUCCESS;
 }

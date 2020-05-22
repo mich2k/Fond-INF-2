@@ -1,3 +1,4 @@
 {
-    "previewServer.port": 59946
+    "previewServer.port": 59946,
+    "C_Cpp.errorSquiggles": "Disabled"
 }

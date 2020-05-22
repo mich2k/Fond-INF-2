@@ -4,16 +4,6 @@
 /*                                 Element                                   */
 /*****************************************************************************/
 
-/*
-  struct Address {
-      char name[40];
-      char street[50];
-      int number;
-      char city[30];
-      char province[3];
-      char postal_code[6];
-  };
-*/
 
 bool ElemCompare(const ElemType* e1, const ElemType* e2) {
     if (strcmp(e1->name, e2->name) != 0 ||
@@ -55,9 +45,22 @@ void ElemDelete(ElemType* e) {
     free(e);
     return;
 }
+/*
+  struct Address {
+      char name[40];
+      char street[50];
+      int number;
+      char city[30];
+      char province[3];
+      char postal_code[6];
+  };
+*/
 
 int ReadElem(FILE* f, ElemType* e) {
-    return fscanf(f, "%d", e);
+    size_t ret; // CONTROLLO NEL MAIN CHE LA FUNZIONE TORNI 6
+    ret = fscanf(f, "%s %s %i %s %s %s", e->name, e->street, e->number,
+                e->city, e->province, e->postal_code);
+    return ret;
 }
 
 int ReadStdinElem(ElemType* e) {
@@ -65,11 +68,14 @@ int ReadStdinElem(ElemType* e) {
 }
 
 void WriteElem(const ElemType* e, FILE* f) {
-    fprintf(f, "%d", *e);
+    fprintf(f, "%s  %s  %i  %s  %s  %s", e->name, e->street, e->number,
+                e->city, e->province, e->postal_code);
+    return;
 }
 
 void WriteStdoutElem(const ElemType* e) {
     WriteElem(e, stdout);
+    return;
 }
 
 /*****************************************************************************/
