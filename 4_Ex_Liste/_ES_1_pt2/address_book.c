@@ -71,9 +71,10 @@ Item* Sort(Item* i) {
     if (IsEmptyList(i))
         return i;
     char** arr = NULL;
+    Item* first_elem_pointer = i;
     size_t cont = 0, len = 0;
     while (!IsEmptyList(i)) {
-        len = strlen(&i->value.name);
+        len = strlen((const char*) &i->value.name);
         arr = realloc(arr, cont + 1);
         arr[cont] = realloc(arr[cont], sizeof(char) * len);
         memcpy(arr[cont], &i->value.name, len);
@@ -81,10 +82,18 @@ Item* Sort(Item* i) {
         i = GetTailList(i);
     }
     list_bubble_sort(arr, cont);
-    DeleteList(i);
-    for(size_t r = 0; r < cont; r+=1){
-        
+    //DeleteList(i);
+    i = first_elem_pointer;
+    Item* copy = CreateEmptyList();
+    for(size_t j = 0; j < cont; ++j){
+        //ElemType tmp = ElemCopy(*copy->next);
+        copy = InsertHeadList(&i->value, copy->next );
     }
+    for(size_t r = 0; r < cont; r+=1){
+        char* s = arr[r];
+        i = InsertBackList(i, Find( copy, s));
+    }
+    return i;
 }
 /*
 
