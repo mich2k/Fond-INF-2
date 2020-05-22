@@ -21,9 +21,9 @@ bool ElemCompare(const ElemType* e1, const ElemType* e2) {
         strcmp(e1->city, e2->city) != 0 ||
         strcmp(e1->province, e2->province) != 0 ||
         strcmp(e1->postal_code, e2->postal_code) != 0)
-        return false;
+        return 1;
     else
-        return true;
+        return 0;
 }
 
 ElemType ElemCopy(const ElemType* e) {

@@ -7,8 +7,9 @@
 const ElemType* Find(const Item* i, const char* name) {
     if (IsEmptyList(i))
         return NULL;
+    char* curr_name = NULL;
     while (true) {
-        char* curr_name = malloc(40 * sizeof(char));
+        curr_name = realloc(curr_name,40 * sizeof(char));
         memcpy(curr_name, &(i->value).name, 40);
         if (strcmp(name, curr_name) == 0) {
             free(curr_name);
@@ -16,7 +17,7 @@ const ElemType* Find(const Item* i, const char* name) {
         }
         i = GetTailList(i);
     }
-    // free(curr_name);
+    free(curr_name);
     return NULL;
 }
 
@@ -31,7 +32,7 @@ Item* Delete(Item* i, const char* name) {
         free(i);
         return tmp;
     }
-    Item* tmp = InsertHeadList(GetHeadValueList(i), RemoveRec(e, GetTailList(i)));
+    Item* tmp = InsertHeadList(GetHeadValueList(i), Delete(e, GetTailList(i)));
     free(i);
     return tmp;
 }
@@ -58,5 +59,6 @@ int main(void) {
     i = InsertHeadList(&e1, i);
     i = InsertHeadList(&e2, i);
     Find(i, "Gennaro");
+    i = Delete(i, "Pasqua");
     return EXIT_SUCCESS;
 }
