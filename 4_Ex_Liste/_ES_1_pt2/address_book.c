@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-//#include "list_int.h"
 #include "primitive.h"
 
 const ElemType* Find(const Item* i, const char* name) {
@@ -74,7 +73,7 @@ Item* Sort(Item* i) {
     Item* first_elem_pointer = i;
     size_t cont = 0, len = 0;
     while (!IsEmptyList(i)) {
-        len = strlen((const char*) &i->value.name);
+        len = strlen((const char*)&i->value.name);
         arr = realloc(arr, cont + 1);
         arr[cont] = realloc(arr[cont], sizeof(char) * len);
         memcpy(arr[cont], &i->value.name, len);
@@ -84,19 +83,35 @@ Item* Sort(Item* i) {
     list_bubble_sort(arr, cont);
     i = first_elem_pointer;
     Item* copy = CreateEmptyList();
-    for(size_t j = 0; j < cont; ++j){
+    for (size_t j = 0; j < cont; ++j) {
         copy = InsertHeadList(&i->value, copy);
         i = GetTailList(i);
     }
-    for(size_t r = 0; r < cont; r+=1){
+    for (size_t r = 0; r < cont; r += 1) {
         char* s = arr[r];
-        i = InsertBackList(i, Find( copy, s));
+        i = InsertBackList(i, Find(copy, s));
     }
-    //DeleteList(copy);
-    for(size_t r = 0; r < cont; r+=1)
+    // DeleteList(copy);
+    for (size_t r = 0; r < cont; r += 1)
         free(arr[r]);
     free(arr);
     return i;
+}
+
+Item* Filtra(Item* i, const char* city) {
+    if (IsEmptyList(i))
+        return i;
+    Item* ris = CreateEmptyList();
+    while (!IsEmptyList(i)) {
+        if (strcmp(&i->value.city, city) == 0)
+            ris = InsertHeadList(&i->value, ris);
+        i = GetTailList(i);
+    }
+    return ris;
+}
+
+Item* Reverse(const Item* l){
+    
 }
 /*
 
@@ -122,6 +137,7 @@ int main(void) {
     i = InsertHeadList(&e2, i);
     Find(i, "Gennaro");
     // i = Delete(i, "Pasqua");
-    Sort(i);
+    // Sort(i);
+    Item* ris = Filtra(i, "Napoli");
     return EXIT_SUCCESS;
 }
