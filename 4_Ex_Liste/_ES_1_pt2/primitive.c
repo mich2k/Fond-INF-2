@@ -52,8 +52,7 @@ ElemType ElemCopy(const ElemType* e) {
 }
 
 void ElemDelete(ElemType* e) {
-    ElemType* null = NULL;
-    *e = *null;
+    free(e);
     return;
 }
 
@@ -66,7 +65,7 @@ int ReadStdinElem(ElemType* e) {
 }
 
 void WriteElem(const ElemType* e, FILE* f) {
-    printf("%d", *e);
+    fprintf(f, "%d", *e);
 }
 
 void WriteStdoutElem(const ElemType* e) {
