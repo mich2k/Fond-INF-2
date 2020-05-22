@@ -21,21 +21,30 @@ const ElemType* Find(const Item* i, const char* name) {
     return NULL;
 }
 
-Item* Delete(Item* i, const char* name) {
+Item* recDelete(const ElemType* e, Item* i) {
     if (IsEmptyList(i)) {
         return i;
     }
-    ElemType* e = (ElemType*) Find(i, name);
-
     if (ElemCompare(e, GetHeadValueList(i)) == 0) {
         Item* tmp = GetTailList(i);
         free(i);
         return tmp;
     }
-    Item* tmp = InsertHeadList(GetHeadValueList(i), Delete(e, GetTailList(i)));
+    Item* tmp = InsertHeadList(GetHeadValueList(i), recDelete(e, GetTailList(i)));
     free(i);
     return tmp;
 }
+
+Item* Delete(Item* i, const char* name) {
+    if (IsEmptyList(i)) {
+        return i;
+    }
+    ElemType* e = (ElemType*) Find(i, name);
+    Item* tmp = recDelete(e, i);
+    return tmp;
+}
+
+
 /*
 
     struct Address {
