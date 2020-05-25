@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-struct {
+typedef struct {
     int tipologia;
     int Kcal;
     char nome[20];
@@ -36,5 +36,12 @@ int main(void) {
     size_t N = 5;
     size_t n_piatti = 3;
     uint32_t* vcurr = malloc(N * 32);
+    
+    piatto first = {.tipologia = 1, .kcal = 250, .nome="pasta"};
+
+    piatto second = {.tipologia = 1, .kcal = 250, .nome="pasta"};
+
+    piatto third = {.tipologia = 1, .kcal = 250, .nome="pasta"};
+
     backtrack(struct x, n_piatti, 0, 2, vcurr);
 }
