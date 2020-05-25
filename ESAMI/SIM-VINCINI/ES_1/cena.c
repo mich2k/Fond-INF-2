@@ -17,9 +17,8 @@ typedef struct {
     char nome[20];
 } piatto;
 
-void backtrack(struct piatto, size_t n, size_t i, size_t k, uint32_t* vcurr) {
+void backtrack(piatto x, size_t n, size_t i, size_t k, uint32_t* vcurr) {
     if (i == n) {
-
         for (uint32_t j = 0; j < n; ++j)
             printf("%d ", vcurr[j]);
         puts("");
@@ -27,21 +26,25 @@ void backtrack(struct piatto, size_t n, size_t i, size_t k, uint32_t* vcurr) {
     }
     for (uint32_t r = 0; r < k; ++r) {
         vcurr[i] = r;
-        backtrack(n, i + 1, k, vcurr);
+        backtrack(x, n, i + 1, k, vcurr);
     }
 }
 
 int main(void) {
     size_t k = 2;  // binario
-    size_t N = 5;
+    size_t N = 6;  // quante terne di piatti;
     size_t n_piatti = 3;
     uint32_t* vcurr = malloc(N * 32);
-    
-    piatto first = {.tipologia = 1, .kcal = 250, .nome="pasta"};
 
-    piatto second = {.tipologia = 1, .kcal = 250, .nome="pasta"};
+    // array struct
 
-    piatto third = {.tipologia = 1, .kcal = 250, .nome="pasta"};
+    piatto arr[] = {
+        {1, 200, "primo"}, {2, 300, "secondo"}, {3, 150, "terzo"},
+        {1, 200, "primo"}, {2, 300, "secondo"}, {3, 150, "terzo"}
+    };
 
-    backtrack(struct x, n_piatti, 0, 2, vcurr);
+    for (size_t r = 0; r < N; r += 1)
+        fprintf(stdout, "%d %d %s \n", arr[r].tipologia, arr[r].Kcal, arr[r].nome);
+
+    // backtrack(x, n_piatti, 0, 2, vcurr);
 }
