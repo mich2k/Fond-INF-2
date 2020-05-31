@@ -8,9 +8,11 @@
   a ciascun commensale.
 */
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 typedef struct {
     int tipologia;
     int Kcal;
@@ -19,16 +21,37 @@ typedef struct {
 
 typedef uint32_t u32;
 
+bool _isValid(u32* arr,const size_t* n) {
+    for (u32 j = 0; j < *n; ++j) {
+        if (arr[j] == 0)
+            return false;
+    }
+    bool* check = calloc(3, sizeof(bool));
+    for (u32 j = 0; j < *n; ++j) {
+        if (check[arr[j]] == false)
+            check[arr[j]] = !check[arr[j]];
+        else
+            return false;
+    }
+    return true;
+}
+
 void backtrack(piatto* arr, size_t n, size_t i, size_t k, u32* vcurr) {
     if (i == n) {
-        // for (u32 j = 0; j < n; ++j)
-        //    printf("%d ", vcurr[j]);
+        if (!_isValid(vcurr, &n))
+            return;
+        bool _first_check = false;
+        bool _second_check = false;
+        bool _third_check = false;
+
+        for (u32 j = 0; j < n; ++j)
+            printf("%d ", vcurr[j]);
         u32 kcal_sum = 0;
-        for (u32 j = 0; j < n; j += 1) {
-            // if(vcurr[j] == true)
-            fprintf(stdout, "%d %d %s \n", arr[j].tipologia, arr[j].Kcal,
-                    arr[j].nome);
-        }
+        /* for (u32 j = 0; j < n; j += 1) {
+             // if(vcurr[j] == true)
+             fprintf(stdout, "%d %d %s \n", arr[j].tipologia, arr[j].Kcal,
+                     arr[j].nome);
+         }*/
         puts("");
         return;
     }
@@ -39,20 +62,17 @@ void backtrack(piatto* arr, size_t n, size_t i, size_t k, u32* vcurr) {
 }
 
 int main(void) {
-    size_t k = 2;         // binario
-    size_t N = 2;         // quante terne di piatti;
-    size_t n_piatti = 3;  // numero piatti per ogni terna
+    size_t k = 2;          // binario
+    size_t n_persone = 6;  // quante terne di piatti;
+    size_t n_piatti = 3;   // numero piatti per ogni terna
     u32* vcurr = malloc(n_piatti * sizeof(u32));
 
-    // array struct
+    // array struct di N elementi / piatti
 
-    piatto arr[] = {{1, 200, "primo"}, {2, 300, "secondo"}, {3, 150, "terzo"},
-                    {1, 200, "primo"}, {2, 300, "secondo"}, {3, 150, "terzo"}};
+    piatto arr[] = {{1, 200, "pasta"},     {2, 100, "meat"},
+                    {2, 350, "candies"},   {1, 150, "pizza"},
+                    {2, 170, "meatballs"}, {3, 150, "cake"}};
 
-    /*for (size_t r = 0; r < N * n_piatti; r += 1)
-        fprintf(stdout, "%d %d %s \n", arr[r].tipologia, arr[r].Kcal,
-                arr[r].nome);
-    */
-    backtrack(arr, n_piatti, 0, 2, vcurr);
+    backtrack(arr, n_piatti, 0, 4, vcurr);
     return EXIT_SUCCESS;
 }
