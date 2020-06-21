@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "tree_int.h";
+#include "tree_int.h"
 
 extern Node* BstInsert(const ElemType* e, Node* n);
 
@@ -39,7 +39,7 @@ int main(void) {
         CreateRootTree(&v[3], CreateEmptyTree(), CreateEmptyTree()));
 
     BstInsert(&v[10], tree);
-    
+
     WriteStdoutInOrderTree(tree);
 
     return EXIT_SUCCESS;
