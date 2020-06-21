@@ -28,5 +28,6 @@ int main(void) {
             &v[3], CreateRootTree(&v[4], CreateEmptyTree(), CreateEmptyTree()),
             CreateRootTree(&v[3], CreateEmptyTree(), CreateEmptyTree())));
     ElemType max = *BstTreeMax(tree);
+    DeleteTree(tree);
     return EXIT_SUCCESS;
 }

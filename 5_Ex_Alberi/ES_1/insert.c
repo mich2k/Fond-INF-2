@@ -41,6 +41,6 @@ int main(void) {
     BstInsert(&v[10], tree);
 
     WriteStdoutInOrderTree(tree);
-
+    DeleteTree(tree);
     return EXIT_SUCCESS;
 }

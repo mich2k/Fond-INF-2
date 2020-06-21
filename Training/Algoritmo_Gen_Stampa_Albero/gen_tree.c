@@ -38,6 +38,7 @@ int main(void) {
             &v[3], CreateRootTree(&v[4], CreateEmptyTree(), CreateEmptyTree()),
             CreateRootTree(&v[3], CreateEmptyTree(), CreateEmptyTree())));
     ricorsione(tree);
+    DeleteTree(tree);
     return EXIT_SUCCESS;
 }
 

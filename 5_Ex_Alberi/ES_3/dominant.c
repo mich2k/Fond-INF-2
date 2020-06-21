@@ -30,5 +30,6 @@ int main(void) {
             CreateRootTree(&v[3], CreateEmptyTree(), CreateEmptyTree())));
     int ris = CountDominant(tree);
     WriteStdoutInOrderTree(tree);
+    DeleteTree(tree);
     return EXIT_SUCCESS;
 }
