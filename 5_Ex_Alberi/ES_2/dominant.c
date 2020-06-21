@@ -1,4 +1,3 @@
-#include <stdio.h>  //levami
 #include <stdlib.h>
 
 #include "tree_int.h"
