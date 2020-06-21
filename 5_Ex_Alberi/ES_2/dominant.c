@@ -1,6 +1,14 @@
 #include <stdlib.h>
 #include "tree_int.h"
 
+extern int CountDominant (const Node*);
+
+extern int CountDominant (const Node* t){
+
+
+}
+
+
 
 
 int main(void) {
@@ -13,7 +21,6 @@ int main(void) {
             CreateEmptyTree()),
         CreateRootTree(&v[3], CreateEmptyTree(), CreateEmptyTree()));
 
-    BstInsert(&v[10], tree);
     
     WriteStdoutInOrderTree(tree);
 
