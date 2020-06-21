@@ -1,24 +1,18 @@
 #include "tree_int.h"
 #include <stdlib.h>
 
-extern Node* DeleteBstNode(Node*, const ElemType*);
+extern Node* BstInsert(const ElemType*, Node*);
+extern Node* BstInsertRec(const ElemType*e, Node*n;
 
-Node* DeleteBstNode(Node*n, const ElemType*key){
-    if(IsEmptyTree(n) || *key == *GetRootValueTree(n))
-        return NULL;
-    Node* root_pos = n;
-    while(ElemCompare(GetRootValueTree(n), key) != 0){
-        if(ElemCompare(GetRootValueTree(n), key) < 0)
-            n = RightTree(n);
-        else
-            n = LeftTree(n);        
-    }
+Node* BstInsertRec(const ElemType*e, Node*n){
+    
+}
 
-    if(IsLeafTree(n))
-        n->value = NULL;
+Node* BstInsert(const ElemType*e, Node*n){
+    if(IsEmptyTree(n))
+        return CreateRootTree(e, CreateEmptyTree(), CreateEmptyTree());
     else
-        DeleteTree(n);
-    return root_pos;
+        return BstInsertRec(e, n);
 }
 
 
