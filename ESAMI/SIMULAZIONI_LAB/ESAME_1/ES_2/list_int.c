@@ -1,136 +1,79 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include "list_int.h"
+#include <stdio.h>
 
-#include <string.h>
-#include <stdlib.h>
-
-/*****************************************************************************/
-/*                                 Element                                   */
-/*****************************************************************************/
-
-int ElemCompare(const ElemType *e1, const ElemType *e2)
-{
-    return (*e1 > *e2) - (*e1 < *e2);
-}
-
-ElemType ElemCopy(const ElemType *e)
-{
-    return *e;
-}
-
-void ElemDelete(ElemType *e)
-{}
-
-ElemType ReadElem(FILE *f)
-{
-    ElemType e;
-    fscanf(f, "%d", &e);
-    return e;
-}
-
-ElemType ReadStdinElem()
-{
-    return ReadElem(stdin);
-}
-
-void WriteElem(const ElemType *e, FILE *f)
-{
-    printf("%d", *e);
-}
-
-void WriteStdoutElem(const ElemType *e)
-{
-    WriteElem(e, stdout);
-}
-
-/*****************************************************************************/
-/*                          Item & Primitives                                */
-/*****************************************************************************/
-
-Item* CreateEmptyList(void)
+list EmptyList()
 {
     return NULL;
 }
 
-Item* InsertHeadList(const ElemType *e, Item* i)
+list Cons(const element *e, list l) 
 {
-    Item *t = malloc(sizeof(Item));
-    t->value = ElemCopy(e);
-    t->next = i;
+    list t;
+    t = malloc(sizeof(item));
+    t->value = Copy(e);
+    t->next = l;
     return t;
 }
 
-bool IsEmptyList(const Item *i)
-{
-    return i == NULL;
+bool IsEmpty(list l) {
+    return (l == NULL);
 }
 
-const ElemType* GetHeadValueList(const Item *i)
-{
-    if (IsEmptyList(i)) {
-        printf("ERROR: Alla funzione 'GetHeadList()' e' stata passata una lista vuota (NULL pointer).\n");
-        exit(1);
+element Head(list l) {
+    if (IsEmpty(l)) {
+        printf("ERROR: Alla funzione 'Head()' è stata passata una lista vuota (NULL pointer).\n");
+        abort();
     }
     else {
-        return &i->value;
+        return l->value;
     }
 }
 
-Item* GetTailList(const Item* i)
-{
-    if (IsEmptyList(i)) {
-        printf("ERROR: Alla funzione 'GetTail()' e' stata passata una lista vuota (NULL pointer).\n");
-        exit(2);
+list Tail(list l) {
+    if (IsEmpty(l)) {
+        printf("ERROR: Alla funzione 'Tail()' è stata passata una lista vuota (NULL pointer).\n");
+        abort();
     }
     else {
-        return i->next;
+        return l->next;
     }
 }
 
-Item* InsertBackList(Item* i, const ElemType *e)
+element Copy(const element *e) {
+    element el;
+    el = *e;
+    return el;
+}
+
+list InsertBack(list l, const element *e)
 {
+    // Costruisco un item per il nuovo elemento
+    list n = Cons(e, EmptyList());
 
-    Item* n = InsertHeadList(e, CreateEmptyList());
-
-    if (IsEmptyList(i)) {
+    // Se la lista l è vuota, n è quello che la
+    // funzione deve ritornare
+    if (IsEmpty(l)) {
         return n;
     }
 
-    Item* tmp = i;
-    while (!IsEmptyList(GetTailList(tmp))) {
-        tmp = GetTailList(tmp);
+    // Scorro tutti gli elementi (item) della 
+    // lista fino ad arrivare all'ultimo
+    list tmp = l;
+    while (!IsEmpty(Tail(tmp))) {
+        tmp = Tail(tmp);
     }
 
+    // Faccio puntare l'ultimo elemento (item) 
+    // della lista a quello nuovo e ritorno la
+    // lista risultante
     tmp->next = n;
-    return i;
+    return l;
 }
 
-void DeleteList(Item* i)
-{
-    while (!IsEmptyList(i)) {
-        Item* tmp = i;
-        i = i->next;
-        ElemDelete(&tmp->value);
+void FreeList(list l) {
+    while (!IsEmpty(l)) {
+        list tmp = l;
+        l = l->next;
         free(tmp);
     }
-}
-
-/*****************************************************************************/
-/*                            Non Primitives                                 */
-/*****************************************************************************/
-
-void WriteList(const Item *i, FILE *f)
-{
-    printf("[");
-    while (!IsEmptyList(i)) {
-        WriteElem(&i->value, f);
-        i = GetTailList(i);
-        if (!IsEmptyList(i)) printf(", ");
-    }
-    printf("]\n");
-}
-
-void WriteStdoutList(const Item *i)
-{
-    WriteList(i, stdout);
 }

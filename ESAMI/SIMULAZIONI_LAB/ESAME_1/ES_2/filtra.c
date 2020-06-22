@@ -42,35 +42,33 @@ list InsertBack(list l, const element *e);*/
 
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "list_int.h"
-
-typedef struct indirizzo {
-    char via[50];
-    int civico;
-    char citta[30];
-} indirizzo;
-
-typedef indirizzo element;
-
-typedef struct list_element {
-    element value;
-    struct list_element* next;
-} item;
-
-extern list Filtra(list, const char*);
+#include <string.h>
+#include "list_int.h"   // ATTENZIONE: IL COMPILATORE DI GRANA PADANO 
+                        // LO CHIAMA liste_inidirzzi.h
+                        // PER FARLO ANDARE SUL SITO SOSTITUIRE QUESTO INCLUDE CON #include "liste_inidirzzi.h"
 
 list Filtra(list l, const char* citta) {
 
-    if(IsEmptyList(l))
+    if(IsEmpty(l))  // isEmpty sostituisce isEmptyList, queste liberie sono outdated
         return NULL;
-    
-
+    list ris = EmptyList();
+    while(!IsEmpty(l)){
+        char* s = l->value.citta;
+        if(strcmp(s, citta) != 0)
+            ris = InsertBack(ris, &l->value);
+        l = Tail(l);
+    }
+    return ris;
 }
 
 int main(void) {
-    indirizzo primo = {"via gennaro", 69, "Napoli"};
-    indirizzo secondo = {"via esposito", 69, "Modena"};
-    indirizzo terzo = {"via ", 69, "Bolo"};
-
+    indirizzo primo = {"via gennaro", 1, "Napoli"};
+    indirizzo secondo = {"via esposito", 2, "Modena"};
+    indirizzo terzo = {"via ", 3, "Bolo"};
+    list l = EmptyList();
+    l = InsertBack(l, &terzo);
+    l = InsertBack(l, &secondo);
+    l = InsertBack(l, &primo);
+    list ris = Filtra(l, "Napoli");
+    return EXIT_SUCCESS;
 }
