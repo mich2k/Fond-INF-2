@@ -66,7 +66,8 @@ bool req_check(uint32_t* v, char** nomi, int n) {
             char new_lett = nomi[v[j]][0];
             if (i == j)
                 continue;
-            if (new_lett == lett)
+            if (new_lett == lett || ((int)new_lett == (int)lett - 1) ||
+                ((int)new_lett == (int)lett + 1))
                 return false;
         }
     }
@@ -82,7 +83,7 @@ void backtrack(uint32_t i,
     if (i == n) {
         if (!isvalid(vcurr, n))
             return;
-         if (!req_check(vcurr, nomi, n))
+        if (!req_check(vcurr, nomi, n))
             return;
         for (uint32_t r = 0; r < n; ++r)
             fprintf(stdout, "%s ", nomi[vcurr[r]]);
@@ -119,12 +120,21 @@ int Sottogruppi(const char* filename, int k) {
             }
         }
     }
+    if (k > n) {
+        free(tmp);
+        fclose(f);
+        for (uint32_t dealloc = 0; dealloc < n; dealloc++)
+            free(nomi[dealloc]);
+        free(nomi);
+        return -1;
+    }
     free(tmp);
     uint32_t* v = calloc(n, sizeof(uint32_t));
     backtrack(0, n, k, v, nomi, &nsol);
     for (uint32_t dealloc = 0; dealloc < n; dealloc++)
         free(nomi[dealloc]);
     free(nomi);
+    fclose(f);
     return nsol;
 }
 
@@ -134,6 +144,5 @@ int main(void) {
         "es4_input1.inp",
         2);
     printf("%d\n", x);
-    printf("%d %d", 'A', 'B');
     return EXIT_SUCCESS;
 }
