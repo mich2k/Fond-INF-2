@@ -132,7 +132,7 @@ int Sottogruppi(const char* filename, int k) {
     uint32_t* v = calloc(n, sizeof(uint32_t));
     backtrack(0, n, k, v, nomi, &nsol);
     for (uint32_t dealloc = 0; dealloc < n; dealloc++)
-        free(nomi[dealloc]);
+        free(*(nomi+dealloc));
     free(nomi);
     fclose(f);
     return nsol;
