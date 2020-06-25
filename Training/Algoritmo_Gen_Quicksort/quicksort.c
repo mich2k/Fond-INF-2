@@ -2,16 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void swap(int* first, int* second) {
-    int temp = *first;
-    *first = *second;
-    *second = temp;
-}
-
 void display(int* arr, int n) {
     for (int i = 0; i < n; i++)
         printf("%d ", *(arr + i));
     puts("");
+}
+
+void swap(int* first, int* second) {
+    int temp = *first;
+    *first = *second;
+    *second = temp;
 }
 
 void quick_sort(int* v, int first, int last) {
