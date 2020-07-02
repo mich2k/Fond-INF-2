@@ -10,6 +10,7 @@ Una lista contiene un ciclo se almeno uno dei suoi elementi è raggiungibile da 
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+cai
 
 extern bool AnyLoop(Item* l);
 
