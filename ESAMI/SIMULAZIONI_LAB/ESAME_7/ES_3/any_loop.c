@@ -25,7 +25,7 @@ bool AnyLoop(Item* l) {
     Item* second_pos = l;
     for (uint8_t i = 0; !IsEmptyList(curr_pos); i += 1) {
         for (uint8_t j = 0; !IsEmptyList(second_pos); j += 1) {
-            if (true) {
+            if(i!=j) {
                 if (&second_pos->value == &curr_pos->value)
                     return true;
             }
