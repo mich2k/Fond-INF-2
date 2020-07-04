@@ -13,9 +13,15 @@ void backtrack(uint32_t* vcurr, size_t n, size_t i) {
                   (vcurr[j] > vcurr[j + 1] && vcurr[j + 1] < vcurr[j + 2])))
                 return;
         }
-        for (size_t j = 0; j < n; j += 1)
-            printf("%d ", vcurr[j]);
-        puts("");
+        printf("(");
+        for (size_t j = 0; j < n; j += 1) {
+            if (j == n - 1) {
+                printf("%d", vcurr[j]);
+                continue;
+            }
+            printf("%d, ", vcurr[j]);
+        }
+        printf("), ");
         return;
     }
     for (size_t k = 0; k < 3; k += 1) {
