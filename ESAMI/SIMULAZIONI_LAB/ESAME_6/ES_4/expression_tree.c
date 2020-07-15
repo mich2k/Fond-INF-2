@@ -1,21 +1,17 @@
-#include <stdlib.h>
-
 #include "tree_int.h"
+#include <stdlib.h>
+extern void ExpressionTree(Node* t);
 
-extern const ElemType* BstTreeMax(const Node*);
+typedef struct element {
+    char op; 
+    int  vl;
 
-const ElemType* BstTreeMax(const Node* n) {
-    if(IsEmptyTree(n))
-        return NULL;
-    ElemType* max;
-    while(!IsLeafTree(n)){
-        n=RightTree(n);
-        max = (ElemType*)GetRootValueTree(n);
-    }
-    return max;
+    bool is_op;
+}element;
+
+void ExpressionTree(Node* t){
+
 }
-
-// WARNING:   L ALBERO IN ESEMPIO IN QUESTO MAIN, NON E BST!
 
 int main(void) {
     ElemType v[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -30,4 +26,4 @@ int main(void) {
     ElemType max = *BstTreeMax(tree);
     DeleteTree(tree);
     return EXIT_SUCCESS;
-}1
+}
