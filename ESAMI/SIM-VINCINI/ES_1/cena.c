@@ -21,51 +21,43 @@ typedef struct {
 
 typedef uint32_t u32;
 
-bool _isValid(u32* arr,const size_t* n) {
-    for (u32 j = 0; j < *n; ++j) {
-        if (arr[j] == 0)
+bool _isValid(u32* v, int n) {
+    bool* check_arr = calloc(10, sizeof(bool));
+    for (size_t r = 0; r < n; r += 1) {
+        if (check_arr[v[r]])
             return false;
-    }
-    bool* check = calloc(3, sizeof(bool));
-    for (u32 j = 0; j < *n; ++j) {
-        if (check[arr[j]] == false)
-            check[arr[j]] = !check[arr[j]];
         else
-            return false;
+            check_arr[v[r]] = true;
     }
+    free(check_arr);
     return true;
 }
 
-void backtrack(piatto* arr, size_t n, size_t i, size_t k, u32* vcurr) {
+// 4200 Kcal tot
+void backtrack(u32* vcurr, int n, int i, u32 N_PIATTI, size_t* cont) {
     if (i == n) {
-        if (!_isValid(vcurr, &n))
+        if (!_isValid(vcurr, n))
             return;
-        bool _first_check = false;
-        bool _second_check = false;
-        bool _third_check = false;
-
-        for (u32 j = 0; j < n; ++j)
-            printf("%d ", vcurr[j]);
-        u32 kcal_sum = 0;
-        /* for (u32 j = 0; j < n; j += 1) {
-             // if(vcurr[j] == true)
-             fprintf(stdout, "%d %d %s \n", arr[j].tipologia, arr[j].Kcal,
-                     arr[j].nome);
-         }*/
+        (*cont)++;
+        printf("%d)\t", *cont);
+        for (size_t k = 0; k < n; k += 1)
+            printf("%d ", *(vcurr + k));
+        fflush(stdout);
         puts("");
         return;
     }
-    for (u32 r = 0; r < k; ++r) {
-        vcurr[i] = r;
-        backtrack(arr, n, i + 1, k, vcurr);
+    for (u32 j = 1; j <= N_PIATTI;
+         j += 1) {  // 0 < avrò 0/n-1, mentre 1 <= avrò, 1/n, !IMPORTANTE
+        vcurr[i] = j;
+        backtrack(vcurr, n, i + 1, N_PIATTI, cont);
     }
 }
 
 int main(void) {
-    size_t k = 2;          // binario
+    size_t k = 2;          // binario, NON questo caso
     size_t n_persone = 6;  // quante terne di piatti;
-    size_t n_piatti = 3;   // numero piatti per ogni terna
-    u32* vcurr = malloc(n_piatti * sizeof(u32));
+    size_t terna = 3;      // numero piatti per ogni terna
+    u32* vcurr = malloc(terna * sizeof(u32));
 
     // array struct di N elementi / piatti
 
@@ -73,6 +65,8 @@ int main(void) {
                     {2, 350, "candies"},   {1, 150, "pizza"},
                     {2, 170, "meatballs"}, {3, 150, "cake"}};
 
-    backtrack(arr, n_piatti, 0, 4, vcurr);
+    u32 N = sizeof(arr) / sizeof(arr[0]);
+    size_t cont = 0;
+    backtrack(vcurr, 3, 0, N, &cont);
     return EXIT_SUCCESS;
 }
