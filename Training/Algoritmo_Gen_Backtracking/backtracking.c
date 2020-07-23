@@ -22,8 +22,8 @@ void backsubset(uint32_t *nsol, uint32_t i, uint32_t k, uint32_t n, uint32_t *vc
 
 int main(void)
 {
-    uint32_t n = 2, nsol = 0;
-    uint32_t k = 4;
+    uint32_t n = 4, nsol = 0;
+    uint32_t k = 8;
     /*
         VALORI POSSIBILI NOTEVOLI DI k:
             -   (n+1)   stamperà tutte le disposizioni con ripetizione, ovvero  k^(n) soluzioni
