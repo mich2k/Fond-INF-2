@@ -1,4 +1,9 @@
 {
     "previewServer.port": 59946,
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "bitset": "c",
+        "chrono": "c",
+        "algorithm": "c"
+    }
 }

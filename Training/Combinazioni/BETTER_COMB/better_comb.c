@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void backrec(int k,int i, int n, int messi, int* vcurr, int* nsol) {
-    if (i == n && messi != k)
+void backrec(int k,int i, int n, int done, int* vcurr, int* nsol) {
+    if (i == n && done != k)
         return;
-    if (messi == k) {
+    if (done == k) {
         (*nsol)++;
         printf("%d) ", *nsol);
         for (int h = 0; h < n; h++) {
@@ -15,13 +15,13 @@ void backrec(int k,int i, int n, int messi, int* vcurr, int* nsol) {
         return;
     }
     vcurr[i] = 1;
-    backrec(k,i + 1, n, messi + 1, vcurr, nsol);
+    backrec(k,i + 1, n, done + 1, vcurr, nsol);
     vcurr[i] = 0;
-    backrec(k,i + 1, n, messi, vcurr, nsol);
+    backrec(k,i + 1, n, done, vcurr, nsol);
 }
 
 int main(void) {
-    int n = 8;      // COMBINAZIONI DI n ELEMENTI IN k GRUPPI
+    int n = 10;      // COMBINAZIONI DI n ELEMENTI IN k GRUPPI
     int i = 0;
     int k = 4;
     int* vcurr = calloc(n, sizeof(int));
