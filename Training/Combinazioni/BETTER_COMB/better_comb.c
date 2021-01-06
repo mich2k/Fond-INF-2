@@ -9,7 +9,7 @@ void backrec(int k,int i, int n, int done, int* vcurr, int* nsol) {
         printf("%d) ", *nsol);
         for (int h = 0; h < n; h++) {
             if (vcurr[h] == 1)
-                printf("%d", h);
+                printf(" %d ", h);
         }
         puts("");
         return;
